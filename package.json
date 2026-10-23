@@ -1,0 +1,17 @@
+{
+  "name": "platzi-demo-rate-limiting",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Demo local: un formulario antes y después de aplicar rate limiting.",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node --test",
+    "demo:antes": "node scripts/control.js antes",
+    "demo:despues": "node scripts/control.js despues",
+    "demo:limpiar": "node scripts/control.js limpiar",
+    "demo:estado": "node scripts/control.js estado",
+    "demo:enviar": "node scripts/enviar-registros.js"
+  }
+}

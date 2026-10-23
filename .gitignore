@@ -1,0 +1,5 @@
+.DS_Store
+.demo-session.json
+node_modules/
+*.log
+.superpowers/
