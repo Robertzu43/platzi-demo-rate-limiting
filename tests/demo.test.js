@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { request } from 'node:http';
 import { createApp } from '../src/app.js';
 import { createRateLimiter } from '../src/rate-limit.js';
 
@@ -108,4 +109,19 @@ test('cambiar escenas exige token y se rechazan solicitudes desde otros orígene
   assert.equal((await app.send(1, { Origin: 'https://example.com' })).status, 403);
   assert.equal((await app.scene('unknown')).status, 400);
   assert.equal((await app.state()).proteccionActiva, false);
+});
+
+test('una ruta mal formada devuelve 400 y el servidor continúa funcionando', async t => {
+  const app = await setup(t);
+  const status = await new Promise((resolve, reject) => {
+    const req = request(app.base, { path: '//[' }, res => {
+      res.resume();
+      resolve(res.statusCode);
+    });
+    req.setTimeout(1000, () => req.destroy(new Error('El servidor no respondió.')));
+    req.on('error', reject);
+    req.end();
+  });
+  assert.equal(status, 400);
+  assert.equal((await fetch(app.base + '/api/estado')).status, 200);
 });

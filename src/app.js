@@ -33,8 +33,8 @@ export function createApp({ now = Date.now, controlToken = randomUUID() } = {}) 
       req.resume();
       return json(res, 403, { error: 'Origen no permitido.' });
     }
-    const path = new URL(req.url, `http://${req.headers.host}`).pathname;
     try {
+      const path = new URL(req.url, `http://${req.headers.host}`).pathname;
       if (req.method === 'GET' && path === '/api/estado') {
         return json(res, 200, { ...estado, limite: 5, ventanaSegundos: 30 });
       }
@@ -65,6 +65,10 @@ export function createApp({ now = Date.now, controlToken = randomUUID() } = {}) 
       req.resume();
       return json(res, 404, { error: 'Ruta no encontrada.' });
     } catch (error) {
+      if (error.code === 'ERR_INVALID_URL') {
+        req.resume();
+        return json(res, 400, { error: 'La ruta de la solicitud no es válida.' });
+      }
       return json(res, error.status || 500, { error: error.status ? error.message : 'No pudimos procesar la solicitud.' });
     }
   });
