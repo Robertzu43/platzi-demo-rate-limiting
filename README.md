@@ -7,7 +7,8 @@ Demo práctica para la clase **Cómo evitar que tus apps creadas con IA sean hac
 Requisito: Node.js 22 o superior. No necesitas instalar paquetes ni crear cuentas.
 
 ```bash
-cd /Users/robertozuniga/Documents/Codex/2026-10-23/hekl/outputs/platzi-demo-rate-limiting
+git clone https://github.com/Robertzu43/platzi-demo-rate-limiting.git
+cd platzi-demo-rate-limiting
 npm start
 ```
 
@@ -96,4 +97,8 @@ El control local de escenas requiere un token que el servidor guarda en `.demo-s
 - [OWASP: REST Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html)
 - [MDN: HTTP 429](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/429)
 
-Repositorio Git local creado para esta demo; no se ha publicado en GitHub.
+Repositorio: [Robertzu43/platzi-demo-rate-limiting](https://github.com/Robertzu43/platzi-demo-rate-limiting).
+
+## Vista de la prueba
+
+![Cinco registros guardados y siete bloqueados](docs/demo-preview.png)
